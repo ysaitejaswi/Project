@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Course Details</h1>
+
+<table>
+
+    <tr>
+        <th>ID</th>
+        <td>{{ course.id }}</td>
+    </tr>
+
+    <tr>
+        <th>Course Name</th>
+        <td>{{ course.name }}</td>
+    </tr>
+
+    <tr>
+        <th>Course Code</th>
+        <td>{{ course.code }}</td>
+    </tr>
+
+</table>
+
+<br>
+
+<a href="/courses" class="btn">Back to Courses</a>
+
+<a href="/courses/{{ course.id }}/edit" class="btn">Edit Course</a>
+
+{% endblock %}

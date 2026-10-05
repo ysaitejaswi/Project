@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+
+{% block title %}Analytics{% endblock %}
+
+{% block content %}
+
+<h1>Student Performance Analytics</h1>
+
+<form method="GET" action="{{ url_for('analytics.analytics') }}">
+
+    <div class="form-group">
+
+        <label>Filter by Course</label>
+
+        <select name="course_id">
+
+            <option value="">
+                All Courses
+            </option>
+
+            {% for course in courses %}
+
+            <option
+                value="{{ course.id }}"
+                {% if selected_course == course.id|string %}selected{% endif %}
+            >
+                {{ course.name }}
+            </option>
+
+            {% endfor %}
+
+        </select>
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label>Filter by Student</label>
+
+        <select name="student_id">
+
+            <option value="">
+                All Students
+            </option>
+
+            {% for student in students %}
+
+            <option
+                value="{{ student.id }}"
+                {% if selected_student == student.id|string %}selected{% endif %}
+            >
+                {{ student.name }}
+            </option>
+
+            {% endfor %}
+
+        </select>
+
+    </div>
+
+    <button type="submit" class="btn">
+        Apply Filters
+    </button>
+
+</form>
+
+<br>
+
+<h2>Statistics</h2>
+
+<table>
+
+    <tr>
+        <th>Mean</th>
+        <td>{{ mean }}</td>
+    </tr>
+
+    <tr>
+        <th>Median</th>
+        <td>{{ median }}</td>
+    </tr>
+
+    <tr>
+        <th>Standard Deviation</th>
+        <td>{{ std_dev }}</td>
+    </tr>
+
+</table>
+
+<br>
+
+<h2>Average Grade by Course</h2>
+
+<table>
+
+    <tr>
+        <th>Course</th>
+        <th>Average Score</th>
+    </tr>
+
+    {% for item in average_by_course %}
+
+    <tr>
+        <td>{{ item.course_name }}</td>
+        <td>{{ "%.2f"|format(item.score) }}</td>
+    </tr>
+
+    {% else %}
+
+    <tr>
+        <td colspan="2">
+            No data available
+        </td>
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+<br>
+
+<h2>Student Ranking</h2>
+
+<table>
+
+    <tr>
+        <th>Rank</th>
+        <th>Student</th>
+        <th>Average Score</th>
+    </tr>
+
+    {% for item in rankings %}
+
+    <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ item.student_name }}</td>
+        <td>{{ "%.2f"|format(item.score) }}</td>
+    </tr>
+
+    {% else %}
+
+    <tr>
+        <td colspan="3">
+            No ranking data available
+        </td>
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

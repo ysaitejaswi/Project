@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}Upload Grades{% endblock %}
+
+{% block content %}
+
+<h1>Upload Grades</h1>
+
+<p>
+    Upload a CSV file containing student grades.
+</p>
+
+<form action="{{ url_for('upload.upload_grades') }}"
+      method="POST"
+      enctype="multipart/form-data">
+
+    <div class="form-group">
+
+        <label for="file">Select CSV File</label>
+
+        <input
+            type="file"
+            id="file"
+            name="file"
+            accept=".csv"
+            required
+        >
+
+    </div>
+
+    <button type="submit" class="btn">
+        Upload Grades
+    </button>
+
+</form>
+
+<br>
+
+<h3>Required CSV Format</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>student_id</th>
+            <th>course_id</th>
+            <th>score</th>
+            <th>date</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>1</td>
+            <td>85</td>
+            <td>2026-10-04</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>92</td>
+            <td>2026-10-04</td>
+        </tr>
+    </tbody>
+</table>
+
+<br>
+
+<a href="{{ url_for('web_grades.grade_list') }}" class="btn">
+    Back to Grades
+</a>
+
+{% endblock %}

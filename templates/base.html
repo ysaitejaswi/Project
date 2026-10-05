@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}Student Performance Analytics{% endblock %}</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f6f8;
+        }
+
+        nav {
+            background-color: #222;
+            padding: 15px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            width: 90%;
+            margin: 30px auto;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #333;
+            color: white;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 8px 14px;
+            background-color: #333;
+            color: white;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .btn:hover {
+            background-color: #555;
+        }
+
+        .danger {
+            background-color: #c0392b;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .message {
+            padding: 10px;
+            background-color: #d4edda;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<nav align="center">
+    <a href="/">Home</a>
+    <a href="/students">Students</a>
+    <a href="/courses">Courses</a>
+    <a href="/grades">Grades</a>
+    <a href="/analytics">Analytics</a>
+    <a href="/upload/grades">Upload Grades</a>
+</nav>
+
+<div class="container">
+
+    {% block content %}
+    {% endblock %}
+
+</div>
+
+</body>
+</html>

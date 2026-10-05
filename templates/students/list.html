@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}Students{% endblock %}
+
+{% block content %}
+
+<h1>Students</h1>
+
+<a href="{{ url_for('web_students.student_new') }}" class="btn">
+    Add New Student
+</a>
+
+<br><br>
+<form method="GET" action="{{ url_for('web_students.student_list') }}">
+    <input
+        type="text"
+        name="search"
+        placeholder="Search by name or email"
+        value="{{ search }}"
+    >
+    <button type="submit">Search</button>
+    <a href="{{ url_for('web_students.student_list') }}">Clear</a>
+</form>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        {% for student in students %}
+
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ student.name }}</td>
+            <td>{{ student.email }}</td>
+
+            <td>
+                <a
+                    href="{{ url_for('web_students.student_detail', id=student.id) }}"
+                    class="btn"
+                >
+                    View
+                </a>
+
+                <a
+                    href="{{ url_for('web_students.student_edit', id=student.id) }}"
+                    class="btn"
+                >
+                    Edit
+                </a>
+                <form
+                    action="{{ url_for('web_students.student_delete', id=student.id) }}"
+                    method="POST"
+                    style="display:inline;"
+                    onsubmit="return confirm('Are you sure you want to delete this student?');"
+                    >
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit" class="btn danger">Delete</button>
+                </form>
+                
+            </td>
+        </tr>
+
+        {% else %}
+
+        <tr>
+            <td colspan="4">
+                No students found.
+            </td>
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+</table>
+
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Grade{% endblock %}
+
+{% block content %}
+
+<h1>Edit Grade</h1>
+
+<form
+    action="{{ url_for('web_grades.grade_update', id=grade.id) }}"
+    method="POST"
+>
+    <input type="hidden" name="_method" value="PUT">
+
+    <label>Student:</label>
+
+    <select name="student_id" required>
+        {% for student in students %}
+        <option
+            value="{{ student.id }}"
+            {% if student.id == grade.student_id %}selected{% endif %}
+        >
+            {{ student.name }}
+        </option>
+        {% endfor %}
+    </select>
+
+    <br><br>
+
+    <label>Course:</label>
+
+    <select name="course_id" required>
+        {% for course in courses %}
+        <option
+            value="{{ course.id }}"
+            {% if course.id == grade.course_id %}selected{% endif %}
+        >
+            {{ course.name }}
+        </option>
+        {% endfor %}
+    </select>
+
+    <br><br>
+
+    <label>Score:</label>
+
+    <input
+        type="number"
+        name="score"
+        value="{{ grade.score }}"
+        min="0"
+        max="100"
+        step="0.01"
+        required
+    >
+
+    <br><br>
+
+    <label>Date:</label>
+
+    <input
+        type="date"
+        name="date"
+        value="{{ grade.date }}"
+        required
+    >
+
+    <br><br>
+
+    <button type="submit">Update Grade</button>
+</form>
+{% endblock %}
